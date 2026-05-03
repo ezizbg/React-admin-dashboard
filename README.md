@@ -1,118 +1,105 @@
-# SaaS Admin Dashboard
+# React Admin Dashboard
 
-React Admin dashboard upgraded to strong junior / junior+ production standards.
+## 1. Описание проекта
 
-## Tech Stack
+**React Admin Dashboard** — SPA-приложение для управления клиентскими аккаунтами и операционными метриками.  
+Система объединяет просмотр данных, фильтрацию, детальные карточки сущностей и контроль состояния запросов в едином интерфейсе.
 
-- React 19 + Vite
+Приложение может использоваться как основа для внутренних B2B-инструментов: админ-панелей, CRM-модулей, кабинетов поддержки и мониторинга клиентской базы.
+
+---
+
+## 2. Основной функционал
+
+- Авторизация и защищенные маршруты
+- Dashboard с ключевыми метриками и статусами аккаунтов
+- Загрузка данных из API с централизованной обработкой ошибок
+- Таблица аккаунтов с поиском, фильтрацией и сортировкой
+- Детальная страница аккаунта
+- Навигация по разделам через React Router
+- Состояния интерфейса: loading / error / empty / retry
+- Skeleton-загрузка и toast-уведомления
+- RU/EN локализация интерфейса
+
+---
+
+## 3. Технологический стек
+
+### Core
+- React 19
+- Vite
+
+### State Management
+- TanStack React Query (server state)
+- Context API (auth, i18n, UI notifications)
+
+### Routing
 - React Router
-- TanStack Query (server state, cache, deduplication)
-- Context API (auth + i18n)
-- Vitest (unit tests)
-- CSS (design tokens + reusable UI primitives)
 
-## Final Architecture
+### API
+- Fetch API
+- Кастомный HTTP-клиент (`timeout`, `retry`, нормализация ошибок)
 
-```text
-src/
-  app/
-    App.jsx                    # routes + Suspense + lazy pages
-    providers/
-      ErrorBoundary.jsx        # root runtime protection
-      QueryProvider.jsx        # QueryClient config
-  entities/
-    user/
-      api/
-        userQueries.js         # server-state hooks and query keys
-  features/
-    auth/
-      AuthProvider.jsx         # session, TTL, auto logout
-      ProtectedRoute.jsx
-    i18n/
-      I18nProvider.jsx
-      i18nContext.js
-      translations.js
-  shared/
-    api/
-      httpClient.js            # timeout, retries, normalized errors
-  components/
-    layout/                    # shell components
-    ui/                        # toasts, states, skeleton, badges
-  pages/                       # route pages (dashboard/users/details/login)
-  services/
-    usersApi.js                # endpoint-specific normalization
-  utils/
-    accountModel.js
-    userFilters.js
-    userFilters.test.js        # unit tests
-  styles/
-    global.css
-```
+### UI
+- Компонентная архитектура
+- CSS design tokens, адаптивная верстка, микроинтеракции
 
-## Key Production Decisions
+### Инструменты разработки
+- ESLint
+- Vitest
 
-### Server state separated from UI state
+---
 
-- Server state is centralized in TanStack Query via `useUsersQuery` and `useUserDetailsQuery`
-- Built-in cache + request deduplication + stale strategy via QueryClient defaults
-- UI state remains local in pages (search/filter/sort controls)
+## 4. Архитектура проекта
 
-### API client hardened for real-world failures
+Проект организован по слоям:
 
-`src/shared/api/httpClient.js` implements:
+- `app` — вход в приложение, роутинг, провайдеры, глобальные границы ошибок
+- `entities` — доменные сущности и доступ к их данным
+- `features` — изолированные бизнес-возможности (auth, i18n)
+- `shared` — переиспользуемая инфраструктура (API-клиент, общие утилиты)
 
-- timeout with abort signal
-- retry with backoff for retryable failures
-- structured `ApiError` with `code/status/isRetryable`
-- normalized error messages for network/timeout/http/server scenarios
+Такое разделение снижает связанность модулей, упрощает поддержку и позволяет масштабировать приложение без деградации структуры.
 
-### Error handling and runtime resilience
+---
 
-- Root-level Error Boundary (`src/app/providers/ErrorBoundary.jsx`)
-- Page-level loading/error/empty states
-- Retry actions on failed server requests
-- Toast notifications for async failures and user feedback
+## 5. Работа с данными
 
-### Auth session reliability
+Server state управляется через **React Query**:
 
-`AuthProvider` now includes:
+- кэширование данных между экранами
+- дедупликация одинаковых запросов
+- stale-стратегия для контролируемого рефетча
+- централизованный `retry` для восстанавливаемых ошибок
 
-- session TTL (`expiresAt`)
-- validity checks on hydration
-- automatic logout on expiry
-- invalid session cleanup from storage
+API-слой реализован через единый HTTP-клиент:
 
-### Performance and rendering strategy
+- timeout на запросы
+- классификация ошибок (`network`, `timeout`, `http`, `server`)
+- нормализованные сообщения для UI
 
-- Lazy route chunks for all pages
-- Suspense fallback UI
-- Query cache prevents duplicate network calls on page transitions
-- Memoized selectors already used for table filtering/sorting
+---
 
-## Quality Gates
+## 6. Особенности реализации
 
-```bash
-npm run lint
-npm run test
-npm run build
-```
+- **Error Boundary** на уровне приложения для защиты от runtime-сбоев
+- **Lazy loading + Suspense** для оптимизации загрузки страниц
+- Разделение server state и UI state
+- Защита от edge-cases: обработка частичных/неполных API-данных
+- TTL-сессия в авторизации и автоматическая инвалидизация
 
-## Run Locally
+---
+
+## 7. Установка и запуск
 
 ```bash
 npm install
 npm run dev
+npm run build
 ```
 
-Open `http://localhost:5173/`.
+---
 
-## Demo Credentials
+## 8. Демо
 
-Any non-empty credentials are valid.
-
-Example:
-
-```text
-admin@example.com
-password
-```
+- GitHub Pages: `https://<your-username>.github.io/react-admin-dashboard/`
