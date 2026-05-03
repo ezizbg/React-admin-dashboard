@@ -14,7 +14,7 @@ createRoot(document.getElementById("root")).render(
     <AppErrorBoundary>
       <AppQueryProvider>
         <I18nProvider>
-          <BrowserRouter>
+          <BrowserRouter basename={import.meta.env.BASE_URL}>
             <AuthProvider>
               <ToastProvider>
                 <App />
