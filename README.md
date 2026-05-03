@@ -26,25 +26,31 @@
 ## 3. Технологический стек
 
 ### Core
+
 - React 19
 - Vite
 
 ### State Management
+
 - TanStack React Query (server state)
 - Context API (auth, i18n, UI notifications)
 
 ### Routing
+
 - React Router
 
 ### API
+
 - Fetch API
 - Кастомный HTTP-клиент (`timeout`, `retry`, нормализация ошибок)
 
 ### UI
+
 - Компонентная архитектура
 - CSS design tokens, адаптивная верстка, микроинтеракции
 
 ### Инструменты разработки
+
 - ESLint
 - Vitest
 
@@ -102,4 +108,4 @@ npm run build
 
 ## 8. Демо
 
-- GitHub Pages: `https://<your-username>.github.io/react-admin-dashboard/`
+- GitHub Pages: `https://ezizbg.github.io/React-admin-dashboard/`
