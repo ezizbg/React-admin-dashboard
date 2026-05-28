@@ -6,6 +6,7 @@ import { AppErrorBoundary } from "./app/providers/ErrorBoundary";
 import { AppQueryProvider } from "./app/providers/QueryProvider";
 import { AuthProvider } from "./features/auth/AuthProvider";
 import { I18nProvider } from "./features/i18n/I18nProvider";
+import { ThemeProvider } from "./features/theme/ThemeProvider";
 import { ToastProvider } from "./components/ui/ToastProvider";
 import "./styles/global.css";
 
@@ -14,13 +15,15 @@ createRoot(document.getElementById("root")).render(
     <AppErrorBoundary>
       <AppQueryProvider>
         <I18nProvider>
-          <BrowserRouter basename={import.meta.env.BASE_URL}>
-            <AuthProvider>
-              <ToastProvider>
-                <App />
-              </ToastProvider>
-            </AuthProvider>
-          </BrowserRouter>
+          <ThemeProvider>
+            <BrowserRouter basename={import.meta.env.BASE_URL}>
+              <AuthProvider>
+                <ToastProvider>
+                  <App />
+                </ToastProvider>
+              </AuthProvider>
+            </BrowserRouter>
+          </ThemeProvider>
         </I18nProvider>
       </AppQueryProvider>
     </AppErrorBoundary>

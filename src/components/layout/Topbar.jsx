@@ -1,25 +1,23 @@
-import { LogOut, Menu } from "lucide-react";
+import { LogOut, Menu, Moon, Sun } from "lucide-react";
 import { useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../../features/auth/authContext";
 import { useI18n } from "../../features/i18n/i18nContext";
+import { useTheme } from "../../features/theme/themeContext";
 import { getInitials } from "../../utils/formatters";
 import { LanguageToggle } from "../ui/LanguageToggle";
+import { NotificationsPanel } from "../ui/NotificationsPanel";
 
 const pageTitles = {
   "/dashboard": "common.dashboard",
-  "/users": "common.accounts"
+  "/users": "common.accounts",
+  "/analytics": "common.analytics",
+  "/settings": "common.settings",
 };
 
 function getTitleKey(pathname) {
-  if (pageTitles[pathname]) {
-    return pageTitles[pathname];
-  }
-
-  if (pathname.startsWith("/users/")) {
-    return "common.accountDetails";
-  }
-
+  if (pageTitles[pathname]) return pageTitles[pathname];
+  if (pathname.startsWith("/users/")) return "common.accountDetails";
   return "common.dashboard";
 }
 
@@ -27,6 +25,7 @@ export function Topbar({ onMenuClick }) {
   const location = useLocation();
   const { user, logout } = useAuth();
   const { t } = useI18n();
+  const { isDark, toggleTheme } = useTheme();
   const titleKey = useMemo(() => getTitleKey(location.pathname), [location.pathname]);
 
   return (
@@ -43,6 +42,16 @@ export function Topbar({ onMenuClick }) {
 
       <div className="topbar__profile">
         <LanguageToggle />
+        <button
+          className="icon-button"
+          type="button"
+          onClick={toggleTheme}
+          aria-label={isDark ? t("settings.switchLight") : t("settings.switchDark")}
+          title={isDark ? t("settings.switchLight") : t("settings.switchDark")}
+        >
+          {isDark ? <Sun size={20} /> : <Moon size={20} />}
+        </button>
+        <NotificationsPanel />
         <div className="avatar" aria-hidden="true">
           {getInitials(user?.name)}
         </div>

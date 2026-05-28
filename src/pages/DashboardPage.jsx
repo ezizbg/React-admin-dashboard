@@ -48,6 +48,7 @@ export function DashboardPage() {
           label={t("dashboard.accounts")}
           value={isLoading ? "..." : users.length}
           helper={t("dashboard.active", { count: activeAccounts })}
+          trend={12}
         />
         <StatCard
           icon={BadgeDollarSign}
@@ -55,6 +56,7 @@ export function DashboardPage() {
           value={isLoading ? "..." : formatCurrency(monthlyRevenue, language)}
           helper={t("dashboard.mrrHelper")}
           tone="amber"
+          trend={8}
         />
         <StatCard
           icon={Activity}
@@ -62,6 +64,7 @@ export function DashboardPage() {
           value={isLoading ? "..." : `${averageHealth}%`}
           helper={t("dashboard.healthHelper")}
           tone="green"
+          trend={-3}
         />
         <StatCard
           icon={CircleAlert}
