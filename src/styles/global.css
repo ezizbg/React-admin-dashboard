@@ -903,6 +903,11 @@ tbody tr:hover {
     display: none;
   }
 
+  /* Language toggle moves to Settings on mobile — hide from topbar */
+  .topbar .language-toggle {
+    display: none;
+  }
+
   .auth-page {
     grid-template-columns: 1fr;
   }
@@ -924,8 +929,34 @@ tbody tr:hover {
 
 @media (max-width: 640px) {
   .topbar {
-    min-height: 72px;
-    padding: 0 16px;
+    min-height: 60px;
+    padding: 0 12px;
+  }
+
+  /* Tighten the right-side icon group */
+  .topbar__profile {
+    gap: 0.15rem;
+  }
+
+  /* Title row: grow to fill, don't overflow */
+  .topbar__title-row {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  /* Keep title on one line with ellipsis */
+  .topbar h1 {
+    font-size: 1.05rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-wrap: normal;
+  }
+
+  /* Hide eyebrow label in topbar to save vertical space */
+  .topbar .topbar__eyebrow {
+    display: none;
   }
 
   .page {
@@ -2066,5 +2097,28 @@ h3 {
 
   .health-bands {
     height: 140px;
+  }
+
+  /* Notification panel: fit within narrow screen */
+  .notif-panel {
+    width: min(320px, calc(100vw - 24px));
+    right: 0;
+  }
+
+  /* Page intro: reduce heading size */
+  .page-intro h2 {
+    font-size: 1.45rem;
+  }
+
+  /* Analytics grid: ensure single column */
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Hide avatar in topbar on very small phones — user info visible in sidebar */
+@media (max-width: 420px) {
+  .topbar .avatar {
+    display: none;
   }
 }
