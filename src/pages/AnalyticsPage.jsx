@@ -58,7 +58,7 @@ export function AnalyticsPage() {
   const { language, t } = useI18n();
 
   useEffect(() => {
-    document.title = `${t("common.analytics")} | AdminFlow`;
+    document.title = t("common.analytics");
   }, [t]);
 
   const analytics = useMemo(() => {

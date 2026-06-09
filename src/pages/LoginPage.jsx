@@ -65,10 +65,6 @@ export function LoginPage() {
             <div className="brand-mark" aria-hidden="true">
               <BarChart3 size={24} />
             </div>
-            <div>
-              <strong>{t("common.appName")}</strong>
-              <span>{t("common.appSubtitle")}</span>
-            </div>
           </div>
           <LanguageToggle />
         </div>

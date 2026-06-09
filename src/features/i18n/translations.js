@@ -7,8 +7,6 @@ export const translations = {
   ru: {
     common: {
       admin: "Администратор",
-      appName: "AdminFlow",
-      appSubtitle: "Revenue Console",
       back: "Назад",
       dashboard: "Дашборд",
       accounts: "Аккаунты",
@@ -219,8 +217,6 @@ export const translations = {
   en: {
     common: {
       admin: "Admin",
-      appName: "AdminFlow",
-      appSubtitle: "Revenue Console",
       back: "Back",
       dashboard: "Dashboard",
       accounts: "Accounts",

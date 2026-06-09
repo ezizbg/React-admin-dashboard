@@ -25,10 +25,6 @@ export function Sidebar({ isOpen, onClose }) {
           <div className="brand-mark" aria-hidden="true">
             <BarChart3 size={22} />
           </div>
-          <div>
-            <strong>{t("common.appName")}</strong>
-            <span>{t("common.appSubtitle")}</span>
-          </div>
           <button className="icon-button sidebar__close" type="button" onClick={onClose} aria-label={t("common.closeMenu")}>
             <X size={20} />
           </button>

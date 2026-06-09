@@ -25,7 +25,7 @@ export function SettingsPage() {
   const [notifPrefs, setNotifPrefs] = useState(getStoredNotifPrefs);
 
   useEffect(() => {
-    document.title = `${t("common.settings")} | AdminFlow`;
+    document.title = t("common.settings");
   }, [t]);
 
   function toggleNotif(key) {
