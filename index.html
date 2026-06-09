@@ -4,6 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SaaS Admin Dashboard</title>
+    <script>
+      // spa-github-pages: restore path from ?p= query param set by 404.html
+      (function () {
+        var search = window.location.search;
+        if (search[1] === 'p' && search[2] === '=') {
+          var path = search.slice(3).split('&q=');
+          var decoded = (path[0] || '').replace(/~and~/g, '&');
+          var query = path[1] ? '?' + path[1].replace(/~and~/g, '&') : '';
+          window.history.replaceState(
+            null, null,
+            window.location.pathname + decoded + query + window.location.hash
+          );
+        }
+      })();
+    </script>
     <script type="module" crossorigin src="/React-admin-dashboard/assets/index-Oj88wEwI.js"></script>
     <link rel="stylesheet" crossorigin href="/React-admin-dashboard/assets/index-BLHoXm_Z.css">
   </head>
