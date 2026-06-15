@@ -570,7 +570,7 @@ tr:last-child td {
 }
 
 tbody tr:hover {
-  background: #f9fbfa;
+  background: var(--surface-muted);
 }
 
 .skeleton-row td {
